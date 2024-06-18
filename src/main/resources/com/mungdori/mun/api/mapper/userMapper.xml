@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mungdori.mun.api.mapper.UserMapper">
+
+    <insert id="insertUserAccount" parameterType="com.mungdori.mun.api.domain.account.Account">
+        INSERT INTO TB_ACCOUNT (NAME, EMAIL, PASSWORD, ROLE)
+        VALUES (#{name}, #{email}, #{password}, #{role})
+    </insert>
+
+    <select id="selectByUser" parameterType="string" resultType="com.mungdori.mun.api.domain.account.Account">
+        SELECT * FROM TB_ACCOUNT WHERE EMAIL = #{email}
+    </select>
+
+</mapper>

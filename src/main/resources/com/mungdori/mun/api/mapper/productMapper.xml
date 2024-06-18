@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mungdori.mun.api.mapper.ProductMapper">
+    <resultMap id="product" type="com.mungdori.mun.api.domain.product.Product">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="price" column="PRICE"/>
+        <result property="tags" column="TAGS" typeHandler="com.mungdori.mun.utils.handler.StringListTypeHandler"/>
+        <result property="imgUrl" column="IMGURL"/>
+    </resultMap>
+    <insert id="insertProduct" parameterType="com.mungdori.mun.api.domain.product.Product">
+        INSERT INTO TB_PRODUCT (NAME, PRICE, TAGS, IMGURL)
+        VALUES (#{name}, #{price}, #{tags, typeHandler=com.mungdori.mun.utils.handler.StringListTypeHandler}, #{imgUrl})
+    </insert>
+
+    <select id="selectAllProduct" resultMap="product">
+        SELECT ID, NAME, PRICE, TAGS, IMGURL
+        FROM TB_PRODUCT
+    </select>
+
+    <select id="selectAllCartByUserId" resultType="com.mungdori.mun.api.domain.product.Cart">
+        SELECT ID
+             , USER_ID AS accountId
+             , PRODUCT_ID
+        FROM TB_CART
+        WHERE USER_ID = #{userId}
+    </select>
+    <insert id="insertCart" parameterType="com.mungdori.mun.api.domain.product.Cart">
+        INSERT INTO TB_CART (USER_ID, PRODUCT_ID)
+        VALUES (#{accountId}, #{productId})
+    </insert>
+
+    <delete id="deleteCart" parameterType="long">
+        DELETE FROM TB_CART
+        WHERE ID = #{cartId}
+    </delete>
+
+</mapper>
