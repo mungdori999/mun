@@ -1,6 +1,7 @@
 package com.mungdori.mun.api.repository.product;
 
 import com.mungdori.mun.api.domain.product.Cart;
+import com.mungdori.mun.api.domain.product.CartDTO;
 import com.mungdori.mun.api.domain.product.Product;
 import com.mungdori.mun.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class ProductRepositoryImpl implements ProductRepository{
     }
 
     @Override
-    public List<Cart> findAllCartByUserId(Long userId) {
+    public List<CartDTO> findAllCartByUserId(Long userId) {
         return productMapper.selectAllCartByUserId(userId);
     }
 

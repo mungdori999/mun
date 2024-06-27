@@ -34,6 +34,7 @@ public class UserService {
         accountDTO.setId(account.getId());
         accountDTO.setEmail(account.getEmail());
         accountDTO.setName(account.getName());
+        accountDTO.setItemId(account.getItemId());
         return accountDTO;
     }
 }

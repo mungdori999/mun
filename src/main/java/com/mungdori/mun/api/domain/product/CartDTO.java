@@ -14,4 +14,8 @@ public class CartDTO {
     private Long id;
     private Long accountId;
     private Long productId;
+
+    private String productName;
+    private String price;
+
 }

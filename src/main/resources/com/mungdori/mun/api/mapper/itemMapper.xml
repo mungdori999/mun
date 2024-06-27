@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mungdori.mun.api.mapper.ItemMapper">
+    <insert id="insertItem" parameterType="com.mungdori.mun.api.domain.item.Item">
+        INSERT INTO TB_ITEM (ITEM_NAME, GLTF)
+        VALUES (#{itemName}, #{gltf})
+    </insert>
+
+    <select id="selectItemById" parameterType="long" resultType="com.mungdori.mun.api.domain.item.Item">
+        SELECT ID, ITEM_NAME, GLTF
+        FROM TB_ITEM
+        WHERE ID = #{itemId}
+    </select>
+    <update id="updateItemIdByUserId" parameterType="long">
+        UPDATE TB_ACCOUNT
+        SET ITEM_ID = #{itemId}
+        WHERE ID = #{userId}
+    </update>
+
+
+</mapper>

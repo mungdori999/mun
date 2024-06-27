@@ -31,20 +31,21 @@ public class ProductService {
                 .imgUrl(product.getImgUrl()).build()).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<CartDTO> getAllCartList(Long userId) {
-        List<Cart> cartList = productRepository.findAllCartByUserId(userId);
-        return cartList.stream().map(cart -> new CartDTO(cart.getId(), cart.getAccountId(), cart.getProductId())).collect(Collectors.toList());
+        return productRepository.findAllCartByUserId(userId);
 
     }
+
+    @Transactional
     public void settingCart(CartDTO cartDTO) {
-        List<Cart> cartList = productRepository.findAllCartByUserId(cartDTO.getAccountId());
-        Optional<Cart> matchCart = cartList.stream()
+        List<CartDTO> cartList = productRepository.findAllCartByUserId(cartDTO.getAccountId());
+        Optional<CartDTO> matchCart = cartList.stream()
                 .filter(cart -> cart.getProductId().equals(cartDTO.getProductId()))
                 .findFirst();
         if (matchCart.isPresent()) {
             productRepository.deleteCart(matchCart.get().getId());
-        }
-        else {
+        } else {
             Cart cart = new Cart();
             cart.setAccountId(cartDTO.getAccountId());
             cart.setProductId(cartDTO.getProductId());

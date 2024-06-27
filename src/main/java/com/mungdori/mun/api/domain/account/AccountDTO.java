@@ -16,4 +16,5 @@ public class AccountDTO {
     private String name;
     private String email;
     private String password;
+    private Long itemId;
 }

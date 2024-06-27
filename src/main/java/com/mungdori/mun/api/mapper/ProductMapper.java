@@ -13,7 +13,7 @@ public interface ProductMapper {
 
     void insertProduct(Product product);
     List<Product> selectAllProduct();
-    List<Cart> selectAllCartByUserId(Long userId);
+    List<CartDTO> selectAllCartByUserId(@Param("userId") Long userId);
 
     void insertCart(Cart cart);
 
