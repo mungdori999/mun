@@ -4,7 +4,12 @@
 
 <mapper namespace="com.mungdori.mun.api.mapper.GageMapper">
     <insert id="insertTimeGage" parameterType="com.mungdori.mun.api.domain.item.TimeGage">
-        INSERT INTO TB_GAGE(ACCOUNT_ID, ITEM_ID, CURRENT_GAGE, TARGET_GAGE)
-        VALUES (#{accountId}, #{itemId}, #{currentGage}, #{targetGage})
+        INSERT INTO TB_GAGE(ACCOUNT_ID, ITEM_ID, START_GAGE, TARGET_GAGE)
+        VALUES (#{accountId}, #{itemId}, #{startGage}, #{targetGage})
     </insert>
+    <select id="selectTimeGage" parameterType="long">
+        SELECT ID,ACCOUNT_ID,ITEM_ID, START_GAGE, TARGET_GAGE
+        FROM TB_GAGE
+        WHERE ACCOUNT_ID = #{userId}
+    </select>
 </mapper>

@@ -4,17 +4,16 @@
     style="flex-direction: column"
     v-if="$store.state.userInfo.itemId"
   >
-    <div class="progress" style="width: 300px">
+    <div class="progress" style="width: 500px">
       <div
         class="progress-bar"
         role="progressbar"
-        style="width: 25%"
-        aria-valuenow="25"
+        :style="{ width: `${gage}%` }"
+        :aria-valuenow="gage"
         aria-valuemin="0"
         aria-valuemax="100"
-      >
-        25%
-      </div>
+      ></div>
+      {{ gage }}%
     </div>
     <canvas id="canvas" width="600" height="600"> </canvas>
   </div>
@@ -36,19 +35,20 @@ import axiosInstance from "@/axios/axiosinstance";
 import Swal from "sweetalert2";
 export default {
   data() {
-    return  {
-      itemName:'',
-      gltf: '',
-    }
+    return {
+      itemName: "",
+      gltf: "",
+      gage: 0.0,
+      timeGage: {},
+    };
   },
   mounted() {
-
     if (this.$store.state.userInfo.itemId) {
-      axiosInstance.get('/api/item/'+this.$store.state.userInfo.itemId)
-      .then((data) => {
-          this.itemName = data.data.itemName;
-          this.gltf = data.data.gltf;
-          this.renderGame()
+      axiosInstance
+        .get("/api/gage")
+        .then((data) => {
+          this.gage = data.data.gage.toFixed(2);
+          this.timeGage = data.data;
         })
         .catch((error) => {
           Swal.fire({
@@ -58,7 +58,20 @@ export default {
           });
         });
 
-      
+      axiosInstance
+        .get("/api/item/" + this.$store.state.userInfo.itemId)
+        .then((data) => {
+          this.itemName = data.data.itemName;
+          this.gltf = data.data.gltf;
+          this.renderGame();
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "에러",
+            text: error,
+            icon: "warning",
+          });
+        });
     }
   },
 

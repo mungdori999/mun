@@ -22,16 +22,16 @@
 
     <select id="selectAllCartByUserId" resultType="com.mungdori.mun.api.domain.product.CartDTO">
         SELECT CART.ID AS id
-             , CART.USER_ID AS accountId
+             , CART.ACCOUNT_ID AS accountId
              , CART.PRODUCT_ID AS productId
              , PRODUCT.NAME AS productName
              , PRODUCT.PRICE AS price
         FROM TB_CART CART
                  JOIN TB_PRODUCT PRODUCT ON CART.PRODUCT_ID = PRODUCT.ID
-        WHERE CART.USER_ID = #{userId}
+        WHERE CART.ACCOUNT_ID = #{userId}
     </select>
     <insert id="insertCart" parameterType="com.mungdori.mun.api.domain.product.Cart">
-        INSERT INTO TB_CART (USER_ID, PRODUCT_ID)
+        INSERT INTO TB_CART (ACCOUNT_ID, PRODUCT_ID)
         VALUES (#{accountId}, #{productId})
     </insert>
 

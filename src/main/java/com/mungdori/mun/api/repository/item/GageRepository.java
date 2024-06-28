@@ -5,4 +5,6 @@ import com.mungdori.mun.api.domain.item.TimeGage;
 public interface GageRepository {
     void saveTimeGage(TimeGage timeGage);
 
+    TimeGage findGage(Long userId);
+
 }

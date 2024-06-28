@@ -14,4 +14,9 @@ public class GageRepositoryImpl implements GageRepository{
     public void saveTimeGage(TimeGage timeGage) {
         gageMapper.insertTimeGage(timeGage);
     }
+
+    @Override
+    public TimeGage findGage(Long userId) {
+        return gageMapper.selectTimeGage(userId);
+    }
 }

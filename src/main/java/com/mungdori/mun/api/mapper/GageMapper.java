@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface GageMapper {
 
     void insertTimeGage(TimeGage timeGage);
+
+    TimeGage selectTimeGage(Long userId);
 }
